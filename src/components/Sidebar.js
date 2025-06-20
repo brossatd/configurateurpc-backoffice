@@ -5,7 +5,16 @@ import { jwtDecode } from 'jwt-decode';
 
 function Sidebar() {
   const token = localStorage.getItem('token');
-  const isAdmin = token ? jwtDecode(token)?.isAdmin : false;
+  let isAdmin = false;
+
+  if (token) {
+    try {
+      isAdmin = jwtDecode(token)?.isAdmin;
+    } catch (e) {
+      // Token invalide, on considère l'utilisateur comme non admin
+      isAdmin = false;
+    }
+  }
 
   return (
     <aside style={{ width: '200px', background: '#eee', padding: '1rem', height: '100vh' }}>

@@ -6,6 +6,7 @@ import Components from './pages/Components';
 import Categories from './pages/Categories';
 import Partners from './pages/Partners';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import PrivateRoute from './components/PrivateRoute';
@@ -35,6 +36,7 @@ function App() {
           <main style={{ flex: 1, padding: '2rem' }}>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/" element={
                 <PrivateRoute>
                   <Dashboard />

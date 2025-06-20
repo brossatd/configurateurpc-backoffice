@@ -14,37 +14,34 @@ function Dashboard() {
   }, [token]);
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <div style={{ marginBottom: '2rem' }}>
-        <h3>Mes configurations</h3>
-        <p>{configs.length}</p>
-        <ul>
-          {configs.map(config => (
-            <li key={config._id}>
-              <Link to={`/configurations/${config._id}`}>{config.name}</Link>
-            </li>
-          ))}
-        </ul>
-        <Link to="/configurations/add"><button className="btn">Créer une configuration</button></Link>
-      </div>
-      {isAdmin && (
-        <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem' }}>
-          <div>
-            <h3>Utilisateurs</h3>
-            <Link to="/users"><button className="btn">Voir les utilisateurs</button></Link>
-          </div>
-          <div>
-            <h3>Composants</h3>
-            <Link to="/components"><button className="btn">Voir les composants</button></Link>
-          </div>
-          <div>
-            <h3>Partenaires</h3>
-            <Link to="/partners"><button className="btn">Voir les partenaires</button></Link>
-          </div>
-        </div>
-      )}
+    <div className="dashboard">
+  <h2>Bienvenue sur le Dashboard</h2>
+
+  <section className="stat-boxes">
+    <div className="stat-card">
+      <h3>Mes configurations</h3>
+      <p className="stat-number">{configs.length}</p>
+      <Link to="/configurations/add"><button className="btn">Créer une configuration</button></Link>
     </div>
+    {isAdmin && (
+      <>
+        <div className="stat-card">
+          <h3>Utilisateurs</h3>
+          <Link to="/users"><button className="btn">Voir</button></Link>
+        </div>
+        <div className="stat-card">
+          <h3>Composants</h3>
+          <Link to="/components"><button className="btn">Voir</button></Link>
+        </div>
+        <div className="stat-card">
+          <h3>Partenaires</h3>
+          <Link to="/partners"><button className="btn">Voir</button></Link>
+        </div>
+      </>
+    )}
+  </section>
+</div>
+
   );
 }
 

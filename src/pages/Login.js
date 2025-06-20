@@ -43,6 +43,9 @@ function Login() {
         <button type="submit" style={{ width: '100%', padding: 10, background: '#23272f', color: '#fff', border: 'none', borderRadius: 4 }}>Se connecter</button>
         {error && <div style={{ color: 'red', marginTop: 12 }}>{error}</div>}
       </form>
+      <p style={{ marginTop: 16, textAlign: 'center' }}>
+        Pas de compte ? <a href="/register">Créer un compte</a>
+      </p>
     </div>
   );
 }
