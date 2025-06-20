@@ -76,7 +76,7 @@ aside nav ul li {
 }
 
 aside nav ul li a {
-  color: #bfc7d5;
+  color: #69a0e7;
   text-decoration: none;
   font-size: 1.1rem;
   padding: 0.5rem 1.5rem;
@@ -102,13 +102,115 @@ main {
 }
 
 h1 {
-  color: #23272f;
+  color: #69a0e7;
   font-size: 2rem;
   margin-bottom: 1.5rem;
 }
 
+h2, h3 {
+  color: #23272f;
+  font-weight: 600;
+}
+
 ul {
   padding-left: 1.5rem;
+}
+
+.btn {
+  padding: 8px 16px;
+  margin: 0 6px;
+  background: #23272f;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: #63686b;
+  color: #fdfdfd;
+}
+
+.btn-danger {
+  background: #e74c3c;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.list-item span {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Champs de formulaire stylés */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 10px 14px;
+  border: 1.5px solid #bfc7d5;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  background: #f8fafc;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #69a0e7;
+  box-shadow: 0 0 0 2px #69a0e733;
+  background: #fff;
+}
+
+form {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+form h2, form h3 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+form button[type="submit"] {
+  margin-top: 1rem;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: #23272f;
+  display: block;
 }
 
 @media (max-width: 900px) {

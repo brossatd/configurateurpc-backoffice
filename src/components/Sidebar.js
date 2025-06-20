@@ -1,8 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { FaTachometerAlt, FaUsers, FaMicrochip, FaThList, FaHandshake } from 'react-icons/fa';
+import { jwtDecode } from 'jwt-decode';
 
 function Sidebar() {
+  const token = localStorage.getItem('token');
+  const isAdmin = token ? jwtDecode(token)?.isAdmin : false;
+
   return (
     <aside style={{ width: '200px', background: '#eee', padding: '1rem', height: '100vh' }}>
       <nav>
@@ -13,10 +17,18 @@ function Sidebar() {
               Dashboard
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/users" className={({ isActive }) => isActive ? 'active' : ''}>
-              <FaUsers style={{ marginRight: '10px' }} />
-              Utilisateurs
+          {isAdmin && (
+            <li>
+              <NavLink to="/users" className={({ isActive }) => isActive ? 'active' : ''}>
+                <FaUsers style={{ marginRight: '10px' }} />
+                Utilisateurs
+              </NavLink>
+            </li>
+          )}
+           <li>
+            <NavLink to="/configurations" className={({ isActive }) => isActive ? 'active' : ''}>
+              <FaMicrochip style={{ marginRight: '10px' }} />
+              Mes configurations
             </NavLink>
           </li>
           <li>
@@ -36,6 +48,9 @@ function Sidebar() {
               <FaHandshake style={{ marginRight: '10px' }} />
               Partenaires
             </NavLink>
+          </li>
+          <li>
+            <Link to="/account">Mon compte</Link>
           </li>
         </ul>
       </nav>
