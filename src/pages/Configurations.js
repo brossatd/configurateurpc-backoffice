@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 function Configurations() {
   const [configs, setConfigs] = useState([]);
   const token = localStorage.getItem('token');
+  const userId = token ? jwtDecode(token)?.id : null;
+  const isAdmin = token ? jwtDecode(token)?.isAdmin : false;
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('/api/configurations', {
+    const url = isAdmin ? '/api/configurations/all' : '/api/configurations';
+    axios.get(url, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(res => setConfigs(res.data));
-  }, [token]);
+  }, [token, isAdmin]);
 
   const handleDelete = async (id) => {
     if(window.confirm('Supprimer cette configuration ?')) {
@@ -54,6 +58,11 @@ function Configurations() {
         {configs.map(config => (
           <li key={config._id}>
             {config.name}
+            {isAdmin && config.user && (
+              <span style={{ marginLeft: 8, color: '#888', fontStyle: 'italic' }}>
+                (par {config.user?.username || config.user?.email || "Utilisateur inconnu"})
+              </span>
+            )}
             <button className="btn" onClick={() => navigate(`/configurations/${config._id}`)}>Détail</button>
             <button className="btn" onClick={() => navigate(`/configurations/edit/${config._id}`)}>Modifier</button>
             <button className="btn btn-danger" onClick={() => handleDelete(config._id)}>Supprimer</button>

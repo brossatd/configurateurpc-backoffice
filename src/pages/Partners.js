@@ -5,7 +5,8 @@ import { jwtDecode } from 'jwt-decode';
 
 function Partners() {
   const [partners, setPartners] = useState([]);
-  const [loading, setLoading] = useState(true); // Ajouté ici
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
   const token = localStorage.getItem('token');
   const isAdmin = token ? jwtDecode(token)?.isAdmin : false;
   const navigate = useNavigate();
@@ -25,7 +26,12 @@ function Partners() {
     }
   };
 
-  if (loading) return <p>Chargement...</p>; // Optionnel
+  if (loading) return <p>Chargement...</p>;
+
+  // Filtrage
+  const filteredPartners = partners.filter(partner =>
+    partner.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div>
@@ -37,12 +43,25 @@ function Partners() {
           </Link>
         </>
       )}
+      <div style={{ marginBottom: '1rem' }}>
+        <input
+          type="text"
+          placeholder="Rechercher par nom de partenaire..."
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          style={{ width: '300px' }}
+        />
+      </div>
       <ul>
-        {partners.map(partner => (
+        {filteredPartners.map(partner => (
           <li key={partner._id} className="list-item">
             <span>{partner.name}</span>
-            <button className="btn" onClick={() => navigate(`/partners/edit/${partner._id}`)}>Modifier</button>
-            <button className="btn btn-danger" onClick={() => handleDelete(partner._id)}>Supprimer</button>
+            {isAdmin && (
+              <>
+                <button className="btn" onClick={() => navigate(`/partners/edit/${partner._id}`)}>Modifier</button>
+                <button className="btn btn-danger" onClick={() => handleDelete(partner._id)}>Supprimer</button>
+              </>
+            )}
           </li>
         ))}
       </ul>
